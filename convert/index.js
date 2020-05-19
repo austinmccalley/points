@@ -7,9 +7,6 @@ let thanks = JSON.parse(rawdata);
 
 console.log('Total Users:', Object.keys(thanks).length);
 
-
- 
-
 Object.keys((thanks)).forEach((u, index) => {
   domagic(u);
   let per = index / Object.keys(thanks).length * 100;
@@ -17,12 +14,8 @@ Object.keys((thanks)).forEach((u, index) => {
 })
 
 async function domagic(uid) {
-  // console.log(uid);
-  let user = await getUser(uid);
-  // console.log(user);
-  
-  let points = thanks[uid].length * 10;
-  // console.log(points);
+  let user = await getUser(uid); // Checks if user exists if not creates one
+  let points = thanks[uid].length * 10; // 10 is the factor from rep to points
   
   givePoints(uid, points);
 }
@@ -78,8 +71,6 @@ function getToken(id) {
 }
 
 async function updateUser(user) {
-  // console.log(user);
-  
   const token = getToken(user.id);
 
   try {
